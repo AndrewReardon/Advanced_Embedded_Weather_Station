@@ -27,34 +27,9 @@ Project File Date:  10/08/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-compiling clkinit.c...
-Serial_USART.c(1): warning: In file included from...
-./Serial_USART.h(4): warning: no newline at end of file [-Wnewline-eof]
-static uint16_t compute_uart_bd(uint32_t, uint32_t);
-                                                    ^
-Serial_USART.c(47): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        return ((PCLK + (Baudrate/2))/Baudrate);
-        ~~~~~~  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
-Serial_USART.c(48): warning: no newline at end of file [-Wnewline-eof]
-}
- ^
-Serial_USART.c(45): warning: unused function 'compute_uart_bd' [-Wunused-function]
-static uint16_t compute_uart_bd(uint32_t PCLK, uint32_t Baudrate)
-                ^
-4 warnings generated.
-compiling Serial_USART.c...
-main.c(13): warning: In file included from...
-./Serial_USART.h(4): warning: no newline at end of file [-Wnewline-eof]
-static uint16_t compute_uart_bd(uint32_t, uint32_t);
-                                                    ^
-./Serial_USART.h(4): warning: unused function 'compute_uart_bd' [-Wunused-function]
-static uint16_t compute_uart_bd(uint32_t, uint32_t);
-                ^
-2 warnings generated.
-compiling main.c...
 linking...
-Program Size: Code=660 RO-data=484 RW-data=4 ZI-data=1632  
-".\Objects\STM32F446RE_Advanced_Embedded_Weather_Station.axf" - 0 Error(s), 6 Warning(s).
+Program Size: Code=656 RO-data=468 RW-data=0 ZI-data=1632  
+".\Objects\STM32F446RE_Advanced_Embedded_Weather_Station.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 

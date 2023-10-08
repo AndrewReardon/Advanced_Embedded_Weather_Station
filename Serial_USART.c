@@ -1,4 +1,4 @@
-#include "Serial_USART.h"
+#include "serial_USART.h"
 
 void usart2Init(void) {
 	//	ARM chips have two types of buses: APB (Advanced Peripheral Bus) and 
