@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'STM32F446RE_Advanced_Embedded_Weather_Station' 
+ * Project: 'Advanced_Embedded_Weather_Station' 
  * Target:  'Target 1' 
  */
 
