@@ -469,14 +469,34 @@
               <FilePath>.\clkinit.h</FilePath>
             </File>
             <File>
-              <FileName>Serial_USART.c</FileName>
+              <FileName>serial_USART.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Serial_USART.c</FilePath>
+              <FilePath>.\serial_USART.c</FilePath>
             </File>
             <File>
-              <FileName>Serial_USART.h</FileName>
+              <FileName>serial_USART.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Serial_USART.h</FilePath>
+              <FilePath>.\serial_USART.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BME280_driver-master</GroupName>
+          <Files>
+            <File>
+              <FileName>bme280.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\BME280_driver-master\bme280.c</FilePath>
+            </File>
+            <File>
+              <FileName>bme280.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\BME280_driver-master\bme280.h</FilePath>
+            </File>
+            <File>
+              <FileName>bme280_defs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\BME280_driver-master\bme280_defs.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -42,6 +42,7 @@ void usart2Init(void) {
 	
 }
 
+
 static uint16_t compute_uart_bd(uint32_t PCLK, uint32_t Baudrate)
 {
 	return ((PCLK + (Baudrate/2))/Baudrate);

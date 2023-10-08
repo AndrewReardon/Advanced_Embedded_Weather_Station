@@ -2,6 +2,7 @@
 ".\objects\main.o"
 ".\objects\clkinit.o"
 ".\objects\serial_usart.o"
+".\objects\bme280.o"
 ".\objects\buttons_nucleo-f446re.o"
 ".\objects\led_nucleo-f446re.o"
 ".\objects\stm32f4xx_hal.o"

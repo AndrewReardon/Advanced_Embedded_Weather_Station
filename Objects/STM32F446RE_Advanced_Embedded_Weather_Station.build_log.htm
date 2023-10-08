@@ -27,9 +27,35 @@ Project File Date:  10/08/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
+main.c(7): warning: In file included from...
+C:/Users/andre/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/STM32F4xx_HAL_Driver/Inc\stm32f4xx_hal.h(30): warning: In file included from...
+./RTE/Device/STM32F446RETx\stm32f4xx_hal_conf.h(403): warning: In file included from...
+C:/Users/andre/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/STM32F4xx_HAL_Driver/Inc\stm32f4xx_hal_adc.h(32): warning: In file included from...
+C:/Users/andre/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h(4019): warning: implicit conversion loses integer precision: 'uint16_t' (aka 'unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_DATA));
+  ~~~~~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/andre/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h(4034): warning: implicit conversion loses integer precision: 'uint16_t' (aka 'unsigned short') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+  return (uint16_t)(READ_BIT(ADCx->DR, ADC_DR_DATA));
+  ~~~~~~ ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/Users/andre/AppData/Local/Arm/Packs/Keil/STM32F4xx_DFP/2.16.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h(4396): warning: unused parameter 'ADCxy_COMMON' [-Wunused-parameter]
+__STATIC_INLINE uint32_t LL_ADC_IsActiveFlag_MST_EOCS(ADC_Common_TypeDef *ADCxy_COMMON)
+                                                                          ^
+main.c(17): warning: non-portable path to file '"Serial_USART.h"'; specified path differs in case from file name on disk [-Wnonportable-include-path]
+#include "serial_USART.h"
+         ^~~~~~~~~~~~~~~~
+         "Serial_USART.h"
+main.c(59): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+main.c(17): warning: In file included from...
+./serial_USART.h(4): warning: unused function 'compute_uart_bd' [-Wunused-function]
+static uint16_t compute_uart_bd(uint32_t, uint32_t);
+                ^
+6 warnings generated.
+compiling main.c...
 linking...
-Program Size: Code=656 RO-data=468 RW-data=0 ZI-data=1632  
-".\Objects\STM32F446RE_Advanced_Embedded_Weather_Station.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=660 RO-data=484 RW-data=4 ZI-data=1632  
+".\Objects\STM32F446RE_Advanced_Embedded_Weather_Station.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -101,15 +127,15 @@ Package Vendor: Keil
       Source file:   Boards/ST/NUCLEO-F446RE/Common/LED_NUCLEO-F446RE.c
 
    * Component: Keil::Device:STM32Cube Framework:Classic:1.7.13
-      Include file:  MDK/Templates/Inc/main.h
-      Include file:  MDK/Templates_LL/Inc/main.h
-      Source file:   MDK/Templates/Src/stm32f4xx_it.c
-      Source file:   MDK/Templates/Src/stm32f4xx_hal_msp.c
-      Source file:   MDK/Templates/Src/main.c
-      Include file:  MDK/Templates/Inc/stm32f4xx_it.h
-      Include file:  CMSIS/Driver/Config/RTE_Device.h
       Source file:   MDK/Templates_LL/Src/main.c
+      Include file:  MDK/Templates_LL/Inc/main.h
+      Include file:  CMSIS/Driver/Config/RTE_Device.h
+      Include file:  MDK/Templates/Inc/stm32f4xx_it.h
+      Source file:   MDK/Templates/Src/stm32f4xx_hal_msp.c
+      Source file:   MDK/Templates/Src/stm32f4xx_it.c
       Include file:  MDK/Templates/Inc/stm32f4xx_hal_conf.h
+      Include file:  MDK/Templates/Inc/main.h
+      Source file:   MDK/Templates/Src/main.c
 
    * Component: Keil::Device:STM32Cube HAL:ADC:1.7.13
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c
@@ -123,19 +149,19 @@ Package Vendor: Keil
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
 
    * Component: Keil::Device:STM32Cube HAL:DMA:1.7.13
-      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c
 
    * Component: Keil::Device:STM32Cube HAL:GPIO:1.7.13
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c
 
    * Component: Keil::Device:STM32Cube HAL:PWR:1.7.13
-      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c
 
    * Component: Keil::Device:STM32Cube HAL:RCC:1.7.13
-      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c
+      Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c
 
    * Component: Keil::Device:STM32Cube HAL:SPI:1.7.13
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c
@@ -147,9 +173,9 @@ Package Vendor: Keil
       Source file:   Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c
 
    * Component: Keil::Device:Startup:2.6.3
+      Source file:   MDK/Device/Source/ARM/STM32F446xx_OPT.s
       Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
-      Source file:   MDK/Device/Source/ARM/STM32F446xx_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f446xx.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
 Build Time Elapsed:  00:00:01

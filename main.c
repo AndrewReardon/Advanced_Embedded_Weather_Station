@@ -4,9 +4,13 @@
 */
 
 #include "stm32f446xx.h"
+#include "stm32f4xx_hal.h"
 #include "stdint.h"
 #include "stdio.h"
 #include "string.h"
+
+// Bosch Driver Libaries
+#include "./BME280_driver-master/bme280.h"
 
 // local libraries
 #include "clkinit.h"
