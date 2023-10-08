@@ -458,6 +458,26 @@
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
             </File>
+            <File>
+              <FileName>clkinit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\clkinit.c</FilePath>
+            </File>
+            <File>
+              <FileName>clkinit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\clkinit.h</FilePath>
+            </File>
+            <File>
+              <FileName>Serial_USART.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Serial_USART.c</FilePath>
+            </File>
+            <File>
+              <FileName>Serial_USART.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Serial_USART.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

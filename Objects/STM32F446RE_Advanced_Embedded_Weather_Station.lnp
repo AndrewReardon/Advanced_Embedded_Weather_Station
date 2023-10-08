@@ -1,5 +1,7 @@
 --cpu=Cortex-M4.fp.sp
 ".\objects\main.o"
+".\objects\clkinit.o"
+".\objects\serial_usart.o"
 ".\objects\buttons_nucleo-f446re.o"
 ".\objects\led_nucleo-f446re.o"
 ".\objects\stm32f4xx_hal.o"
