@@ -3,8 +3,10 @@
 * LD2 connects to PA5
 */
 
-#include "stm32f4xx.h"
+//#include "stm32f4xx.h"
 //#include "stm32f446.h"
+#include "stm32f446xx.h"
+#include "stdint.h"
 #include "stdio.h"
 #include "string.h"
 
@@ -18,7 +20,20 @@ static uint8_t ch = 'a';
 
 int main(void) {
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	usart2Init();
+	
 	
 	
 	while(1) {

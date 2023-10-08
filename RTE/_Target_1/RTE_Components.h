@@ -16,10 +16,6 @@
  */
 #define CMSIS_device_header "stm32f4xx.h"
 
-/* Keil::CMSIS Driver:I2C:2.11 */
-#define RTE_Drivers_I2C1                /* Driver I2C1 */
-        #define RTE_Drivers_I2C2                /* Driver I2C2 */
-        #define RTE_Drivers_I2C3                /* Driver I2C3 */
 /* Keil::Device:STM32Cube Framework:Classic:1.7.13 */
 #define RTE_DEVICE_FRAMEWORK_CLASSIC
 /* Keil::Device:STM32Cube HAL:ADC:1.7.13 */
@@ -32,8 +28,6 @@
 #define RTE_DEVICE_HAL_DMA
 /* Keil::Device:STM32Cube HAL:GPIO:1.7.13 */
 #define RTE_DEVICE_HAL_GPIO
-/* Keil::Device:STM32Cube HAL:I2C:1.7.13 */
-#define RTE_DEVICE_HAL_I2C
 /* Keil::Device:STM32Cube HAL:PWR:1.7.13 */
 #define RTE_DEVICE_HAL_PWR
 /* Keil::Device:STM32Cube HAL:RCC:1.7.13 */
