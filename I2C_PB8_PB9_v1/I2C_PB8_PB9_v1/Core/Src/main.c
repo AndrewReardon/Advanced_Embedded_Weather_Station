@@ -62,7 +62,7 @@ float humidity;
 float pressure;
 
 struct bme280_dev bme280_device;
-struct bme280_settings bme280_set;
+struct bme280_settings settings;
 struct bme280_data compensated_data;
 int8_t result;
 /* USER CODE END PV */
@@ -140,19 +140,37 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-	bme280_device.chip_id = BME280_I2C_ADDR_PRIM;
-	bme280_device.intf = BME280_I2C_INTF;
-	bme280_device.read = user_i2c_read;
-	bme280_device.write = user_i2c_write;
-	bme280_device.delay_us = user_delay_us;
-
-  bme280_set.osr_h = BME280_OVERSAMPLING_1X;
-  bme280_set.osr_p = BME280_OVERSAMPLING_16X;
-  bme280_set.osr_t = BME280_OVERSAMPLING_2X;
-  bme280_set.filter = BME280_FILTER_COEFF_16;
+//	bme280_device.chip_id = BME280_I2C_ADDR_PRIM;
+//	bme280_device.intf = BME280_I2C_INTF;
+//	bme280_device.read = user_i2c_read;
+//	bme280_device.write = user_i2c_write;
+//	bme280_device.delay_us = user_delay_us;
+//	
+//	result = bme280_init(&bme280_device);
+//	uint8_t test = result;
 	
-  result = bme280_set_sensor_settings(UINT8_C(0b00011111), &bme280_set, &bme280_device);
+	
+	//START HERE. Need to figure out why I can't read any data back via I2C...
+	uint8_t id = 0xD0;
+	uint8_t returned_data = 0x00;
+	HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &id, 1, 10);
+  HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, &returned_data, 0x01, 10);
 
+	memcpy(buf, &returned_data, 1);
+	HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	HAL_Delay(500);
+
+	id = id +1;
+	returned_data = returned_data+1;
+
+
+  settings.osr_h = BME280_OVERSAMPLING_1X;
+  settings.osr_p = BME280_OVERSAMPLING_16X;
+  settings.osr_t = BME280_OVERSAMPLING_2X;
+  settings.filter = BME280_FILTER_COEFF_16;
+	//Debugger shows that result of bme280_set_sensor_settings is 0xFE aka 'fail'
+  result = bme280_set_sensor_settings(UINT8_C(0b00011111), &settings, &bme280_device);
+uint8_t test2 = result;
 
   /* USER CODE END 2 */
 

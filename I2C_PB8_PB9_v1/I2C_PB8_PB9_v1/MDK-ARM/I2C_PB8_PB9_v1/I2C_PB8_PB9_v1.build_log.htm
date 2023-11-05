@@ -27,13 +27,13 @@ Project File Date:  11/05/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'I2C_PB8_PB9_v1'
-../Core/Src/main.c(182): warning: passing 'char[16]' to parameter of type 'const uint8_t *' (aka 'const unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+../Core/Src/main.c(204): warning: passing 'char[16]' to parameter of type 'const uint8_t *' (aka 'const unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
                         HAL_UART_Transmit(&huart2, line1, strlen((char*)line1), HAL_MAX_DELAY);
                                                    ^~~~~
 ../Drivers/STM32F4xx_HAL_Driver/Inc\stm32f4xx_hal_uart.h(722): note: passing argument to parameter 'pData' here
 HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size, uint32_t Timeout);
                                                                               ^
-../Core/Src/main.c(183): warning: passing 'char[16]' to parameter of type 'const uint8_t *' (aka 'const unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+../Core/Src/main.c(205): warning: passing 'char[16]' to parameter of type 'const uint8_t *' (aka 'const unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
                         HAL_UART_Transmit(&huart2, line2, strlen((char*)line1), HAL_MAX_DELAY);
                                                    ^~~~~
 ../Drivers/STM32F4xx_HAL_Driver/Inc\stm32f4xx_hal_uart.h(722): note: passing argument to parameter 'pData' here
@@ -42,7 +42,7 @@ HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, const uint8_t *pD
 2 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=20130 RO-data=702 RW-data=12 ZI-data=1940  
+Program Size: Code=19226 RO-data=702 RW-data=12 ZI-data=1940  
 FromELF: creating hex file...
 "I2C_PB8_PB9_v1\I2C_PB8_PB9_v1.axf" - 0 Error(s), 2 Warning(s).
 
