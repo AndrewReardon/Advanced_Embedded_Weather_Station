@@ -1,3 +1,6 @@
+// Working from: https://github.com/eziya/STM32_HAL_BME280
+
+
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -22,6 +25,9 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "string.h"
+#include "bme280.h"
+#include "stdlib.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,6 +53,18 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 // bit shift by 1 since I2C address is only 7 bits long.
 static const uint8_t BME280_ADDR = 0x76 << 1;
+
+char line1[16];
+char line2[16];
+
+float temperature;
+float humidity;
+float pressure;
+
+struct bme280_dev bme280_device;
+struct bme280_settings bme280_set;
+struct bme280_data compensated_data;
+int8_t result;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -55,12 +73,38 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-
+int8_t user_i2c_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr);
+int8_t user_i2c_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr);
+void user_delay_us(uint32_t period, void *intf_ptr);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+int8_t user_i2c_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr)
+{
+  if(HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &reg_addr, 1, 10) != HAL_OK) return -1;
+  if(HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, reg_data, len, 10) != HAL_OK) return -1;
 
+  return 0;
+}
+
+void user_delay_us(uint32_t period, void *intf_ptr)
+{
+  HAL_Delay(period);
+}
+
+int8_t user_i2c_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr)
+{
+  int8_t *buf;
+  buf = malloc(len +1);
+  buf[0] = reg_addr;
+  memcpy(buf +1, reg_data, len);
+
+  if(HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), (uint8_t*)buf, len + 1, HAL_MAX_DELAY) != HAL_OK) return -1;
+
+  free(buf);
+  return 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -96,6 +140,20 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+	bme280_device.chip_id = BME280_I2C_ADDR_PRIM;
+	bme280_device.intf = BME280_I2C_INTF;
+	bme280_device.read = user_i2c_read;
+	bme280_device.write = user_i2c_write;
+	bme280_device.delay_us = user_delay_us;
+
+  bme280_set.osr_h = BME280_OVERSAMPLING_1X;
+  bme280_set.osr_p = BME280_OVERSAMPLING_16X;
+  bme280_set.osr_t = BME280_OVERSAMPLING_2X;
+  bme280_set.filter = BME280_FILTER_COEFF_16;
+	
+  result = bme280_set_sensor_settings(UINT8_C(0b00011111), &bme280_set, &bme280_device);
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,6 +164,36 @@ int main(void)
 		strcpy((char*)buf, "Hello!\r\n");
 		HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
 		HAL_Delay(500);
+		
+		result = bme280_set_sensor_mode(UINT8_C(0x01), &bme280_device);
+		HAL_Delay(40);
+    result = bme280_get_sensor_data(BME280_ALL, &compensated_data, &bme280_device);		
+    if(result == BME280_OK)
+    {
+      temperature = compensated_data.temperature / 100.0;      /* °C  */
+      humidity = compensated_data.humidity / 1024.0;           /* %   */
+      pressure = compensated_data.pressure / 10000.0;          /* hPa */
+
+      memset(line1, 0, sizeof(line1));
+      memset(line2, 0, sizeof(line2));
+      sprintf(line1, "HUMID: %03.1f \n\r", humidity);
+      sprintf(line2, "TEMP: %03.1f \n\r", temperature);
+			
+			strcpy((char*)buf, "DATA222!\r\n");
+			HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+			HAL_Delay(500);
+			HAL_UART_Transmit(&huart2, line1, strlen((char*)line1), HAL_MAX_DELAY);
+			HAL_UART_Transmit(&huart2, line2, strlen((char*)line1), HAL_MAX_DELAY);
+			HAL_Delay(500);
+
+    }
+
+    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
+    HAL_Delay(1000);
+	
+		
+
+		
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

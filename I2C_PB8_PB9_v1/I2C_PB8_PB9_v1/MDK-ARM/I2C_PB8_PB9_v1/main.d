@@ -31,4 +31,8 @@ i2c_pb8_pb9_v1/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  ..\Drivers\BME280_driver-master\bme280.h \
+  ..\Drivers\BME280_driver-master\bme280_defs.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h

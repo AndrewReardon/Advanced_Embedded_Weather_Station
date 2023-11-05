@@ -3,6 +3,7 @@
 "i2c_pb8_pb9_v1\main.o"
 "i2c_pb8_pb9_v1\stm32f4xx_it.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_msp.o"
+"i2c_pb8_pb9_v1\hal_i2c_rw_functions_bme280.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_i2c.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_i2c_ex.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_rcc.o"
@@ -22,6 +23,7 @@
 "i2c_pb8_pb9_v1\stm32f4xx_hal_tim_ex.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_uart.o"
 "i2c_pb8_pb9_v1\system_stm32f4xx.o"
+"i2c_pb8_pb9_v1\bme280.o"
 --strict --scatter "I2C_PB8_PB9_v1\I2C_PB8_PB9_v1.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
