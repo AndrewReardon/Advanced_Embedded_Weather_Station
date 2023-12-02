@@ -25,6 +25,7 @@
 #include "bme280.h"
 #include "stdlib.h"
 #include "stdio.h"
+#include "HAL_i2c_rw_functions_BME280.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -70,38 +71,12 @@ static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
-int8_t user_i2c_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr);
-int8_t user_i2c_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr);
-void user_delay_us(uint32_t period, void *intf_ptr);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int8_t user_i2c_read(uint8_t reg_addr, uint8_t *reg_data, uint32_t len, void *intf_ptr)
-{
-  if(HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &reg_addr, 1, 10) != HAL_OK) return -1;
-  if(HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, reg_data, len, 10) != HAL_OK) return -1;
 
-  return 0;
-}
-
-void user_delay_us(uint32_t period, void *intf_ptr)
-{
-  HAL_Delay(period);
-}
-
-int8_t user_i2c_write(uint8_t reg_addr, const uint8_t *reg_data, uint32_t len, void *intf_ptr)
-{
-  int8_t *buf;
-  buf = malloc(len +1);
-  buf[0] = reg_addr;
-  memcpy(buf +1, reg_data, len);
-
-  if(HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), (uint8_t*)buf, len + 1, HAL_MAX_DELAY) != HAL_OK) return -1;
-
-  free(buf);
-  return 0;
-}
 /* USER CODE END 0 */
 
 /**
@@ -137,33 +112,27 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-//	bme280_device.chip_id = BME280_I2C_ADDR_PRIM;
-//	bme280_device.intf = BME280_I2C_INTF;
-//	bme280_device.read = user_i2c_read;
-//	bme280_device.write = user_i2c_write;
-//	bme280_device.delay_us = user_delay_us;
+// START HERE: Fix these functions to link to HAL_i2c_rw_functions_BME280.h (I wrote those files)
+	bme280_device.chip_id = BME280_I2C_ADDR_PRIM;
+	bme280_device.intf = BME280_I2C_INTF;
+	bme280_device.read = user_i2c_read;
+	bme280_device.write = user_i2c_write;
+	bme280_device.delay_us = user_delay_us;
 //	
 //	result = bme280_init(&bme280_device);
 //	uint8_t test = result;
 	
-	while (1) {
-	//START HERE. Need to figure out why I can't read any data back via I2C...
-	uint8_t id = 0xD0;
-	uint8_t test_data = 'a';
-	uint8_t *returned_data = &test_data;
-	HAL_I2C_Mem_Read(&hi2c1, (BME280_ADDR), 0xD0, I2C_MEMADD_SIZE_8BIT, returned_data, 1, HAL_MAX_DELAY);
-//	HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &id, 1, 10);
-//  HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, &returned_data, 0x01, 10);
-	// *returned_data = 'b';
-	//test_data = *returned_data;
-	memcpy(buf, returned_data, 1);
-	//memcpy(buf, returned_data, sizeof(uint8_t));
-	HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
-	HAL_Delay(500);
-
-//	id = id +1;
-//	returned_data = returned_data+1;
-
+//	while (1) {
+//	//START HERE. Need to follow the remainder of the microcontrollers lab bme280 blue pill tutorial.
+//		uint8_t id = 0xD0;
+//		uint8_t test_data = 'a';
+//		uint8_t *returned_data = &test_data;
+////	HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &id, 1, 10);
+////  HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, returned_data, 1, 10);
+//		HAL_I2C_Mem_Read(&hi2c1, (BME280_ADDR), 0xD0, I2C_MEMADD_SIZE_8BIT, returned_data, 1, HAL_MAX_DELAY);
+//		memcpy(buf, returned_data, 1);
+//		HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+//		HAL_Delay(500);
 
 //  settings.osr_h = BME280_OVERSAMPLING_1X;
 //  settings.osr_p = BME280_OVERSAMPLING_16X;
@@ -177,8 +146,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-//  while (1)
-//  {
+  while (1)
+  {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
