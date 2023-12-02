@@ -1,9 +1,9 @@
 --cpu=Cortex-M4.fp.sp
 "i2c_pb8_pb9_v1\startup_stm32f446xx.o"
+"i2c_pb8_pb9_v1\hal_i2c_rw_functions_bme280.o"
 "i2c_pb8_pb9_v1\main.o"
 "i2c_pb8_pb9_v1\stm32f4xx_it.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_msp.o"
-"i2c_pb8_pb9_v1\hal_i2c_rw_functions_bme280.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_i2c.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_i2c_ex.o"
 "i2c_pb8_pb9_v1\stm32f4xx_hal_rcc.o"

@@ -1,6 +1,3 @@
-// Working from: https://github.com/eziya/STM32_HAL_BME280
-
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -52,7 +49,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 // bit shift by 1 since I2C address is only 7 bits long.
-static const uint8_t BME280_ADDR = 0x76 << 1;
+#define BME280_ADDR 	(0x76 << 1)
 
 char line1[16];
 char line2[16];
@@ -149,69 +146,41 @@ int main(void)
 //	result = bme280_init(&bme280_device);
 //	uint8_t test = result;
 	
-	
+	while (1) {
 	//START HERE. Need to figure out why I can't read any data back via I2C...
 	uint8_t id = 0xD0;
-	uint8_t returned_data = 0x00;
-	HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &id, 1, 10);
-  HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, &returned_data, 0x01, 10);
-
-	memcpy(buf, &returned_data, 1);
+	uint8_t test_data = 'a';
+	uint8_t *returned_data = &test_data;
+	HAL_I2C_Mem_Read(&hi2c1, (BME280_ADDR), 0xD0, I2C_MEMADD_SIZE_8BIT, returned_data, 1, HAL_MAX_DELAY);
+//	HAL_I2C_Master_Transmit(&hi2c1, (BME280_ADDR), &id, 1, 10);
+//  HAL_I2C_Master_Receive(&hi2c1, (BME280_ADDR) | 0x01, &returned_data, 0x01, 10);
+	// *returned_data = 'b';
+	//test_data = *returned_data;
+	memcpy(buf, returned_data, 1);
+	//memcpy(buf, returned_data, sizeof(uint8_t));
 	HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
 	HAL_Delay(500);
 
-	id = id +1;
-	returned_data = returned_data+1;
+//	id = id +1;
+//	returned_data = returned_data+1;
 
 
-  settings.osr_h = BME280_OVERSAMPLING_1X;
-  settings.osr_p = BME280_OVERSAMPLING_16X;
-  settings.osr_t = BME280_OVERSAMPLING_2X;
-  settings.filter = BME280_FILTER_COEFF_16;
-	//Debugger shows that result of bme280_set_sensor_settings is 0xFE aka 'fail'
-  result = bme280_set_sensor_settings(UINT8_C(0b00011111), &settings, &bme280_device);
-uint8_t test2 = result;
+//  settings.osr_h = BME280_OVERSAMPLING_1X;
+//  settings.osr_p = BME280_OVERSAMPLING_16X;
+//  settings.osr_t = BME280_OVERSAMPLING_2X;
+//  settings.filter = BME280_FILTER_COEFF_16;
+//	//Debugger shows that result of bme280_set_sensor_settings is 0xFE aka 'fail'
+//  result = bme280_set_sensor_settings(UINT8_C(0b00011111), &settings, &bme280_device);
+//uint8_t test2 = result;
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+//  while (1)
+//  {
     /* USER CODE END WHILE */
-		strcpy((char*)buf, "Hello!\r\n");
-		HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
-		HAL_Delay(500);
-		
-		result = bme280_set_sensor_mode(UINT8_C(0x01), &bme280_device);
-		HAL_Delay(40);
-    result = bme280_get_sensor_data(BME280_ALL, &compensated_data, &bme280_device);		
-    if(result == BME280_OK)
-    {
-      temperature = compensated_data.temperature / 100.0;      /* °C  */
-      humidity = compensated_data.humidity / 1024.0;           /* %   */
-      pressure = compensated_data.pressure / 10000.0;          /* hPa */
 
-      memset(line1, 0, sizeof(line1));
-      memset(line2, 0, sizeof(line2));
-      sprintf(line1, "HUMID: %03.1f \n\r", humidity);
-      sprintf(line2, "TEMP: %03.1f \n\r", temperature);
-			
-			strcpy((char*)buf, "DATA222!\r\n");
-			HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
-			HAL_Delay(500);
-			HAL_UART_Transmit(&huart2, line1, strlen((char*)line1), HAL_MAX_DELAY);
-			HAL_UART_Transmit(&huart2, line2, strlen((char*)line1), HAL_MAX_DELAY);
-			HAL_Delay(500);
-
-    }
-
-    HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_15);
-    HAL_Delay(1000);
-	
-		
-
-		
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

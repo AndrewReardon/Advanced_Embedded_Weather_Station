@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F446xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Drivers\BME280_driver-master</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Drivers/BME280_driver-master</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -395,6 +395,16 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
+              <FileName>HAL_i2c_rw_functions_BME280.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HAL_i2c_rw_functions_BME280.c</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_i2c_rw_functions_BME280.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HAL_i2c_rw_functions_BME280.h</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/main.c</FilePath>
@@ -408,16 +418,6 @@
               <FileName>stm32f4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32f4xx_hal_msp.c</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_i2c_rw_functions_BME280.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HAL_i2c_rw_functions_BME280.c</FilePath>
-            </File>
-            <File>
-              <FileName>HAL_i2c_rw_functions_BME280.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\HAL_i2c_rw_functions_BME280.h</FilePath>
             </File>
           </Files>
         </Group>
